@@ -21,44 +21,29 @@ export default function App() {
     setTodo("");
   };
 
-  const fetchTodos = async () => {
+  const getTodos = async () => {
     const data = await AsyncStorage.getItem("todos");
     if (data) setTodos(JSON.parse(data));
   };
 
   useEffect(() => {
-    fetchTodos();
+    getTodos();
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>React Native Tutorial</Text>
+      <Text style={styles.heading}>React Native Todo App</Text>
       <View style={styles.inputContainer}>
         <TextInput
           value={todo}
           onChangeText={(text) => setTodo(text)}
-          placeholder="Enter a todo"
+          placeholder="Enter a todo item"
           style={styles.input}
         />
         <TouchableOpacity onPress={handleAddTodo}>
-          <Text style={styles.button}>Go</Text>
+          <Text style={styles.button}>Add</Text>
         </TouchableOpacity>
       </View>
-      {/* ScrollView vs FlatList */}
-
-      {/* Using ScrollView and map() */}
-      {/* <ScrollView style={{ width: "100%", marginTop: 10 }}> 
-        {todos?.map((todo) => (
-          <SingleTodo
-            todos={todos}
-            setTodos={setTodos}
-            todo={todo}
-            key={todo.id}
-          />
-        ))}
-      </ScrollView> */}
-
-      {/* By FlatList */}
       <View style={{ width: "100%", marginTop: 10 }}>
         <FlatList
           data={todos}
@@ -77,7 +62,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#F7DAD9",
+    backgroundColor: "#730099",
   },
   inputContainer: {
     flexDirection: "row",
@@ -87,6 +72,8 @@ const styles = StyleSheet.create({
   button: {
     padding: 13,
     backgroundColor: "white",
+    color: "black",
+    fontWeight: "700",
     borderRadius: 50,
     elevation: 10,
   },
@@ -104,5 +91,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     fontSize: 30,
     fontWeight: "700",
+    color: "white",
   },
 });
